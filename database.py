@@ -15,3 +15,14 @@ SessionLocal = sessionmaker(
 )
 
 Base = declarative_base()
+
+from sqlalchemy import Column, Integer, String, Text
+
+class Usuario(Base):
+    __tablename__ = "usuarios"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(String, unique=True, index=True)
+    nome = Column(String, nullable=True)
+    gostos = Column(Text, nullable=True)
+    
