@@ -25,4 +25,5 @@ class Usuario(Base):
     user_id = Column(String, unique=True, index=True)
     nome = Column(String, nullable=True)
     gostos = Column(Text, nullable=True)
-    
+
+Base.metadata.create_all(bind=engine)    
