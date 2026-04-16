@@ -181,6 +181,7 @@
     font-size: 14px;
     line-height: 1.6;
     font-weight: 400;
+    white-space: pre-wrap;
   }
 
   .message.bot .bubble {
@@ -433,6 +434,13 @@
   const inputEl = document.getElementById('input');
   const sendBtn = document.getElementById('sendBtn');
 
+  let userId = localStorage.getItem("user_id");
+
+  if (!userId) {
+    userId = crypto.randomUUID();
+    localStorage.setItem("user_id", userId);
+  }
+
   inputEl.addEventListener('input', () => {
     inputEl.style.height = 'auto';
     inputEl.style.height = Math.min(inputEl.scrollHeight, 120) + 'px';
@@ -513,7 +521,7 @@
       const res = await fetch(API_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ texto: text })
+        body: JSON.stringify({ texto: text, user_id: userId })
       });
 
       const data = await res.json();
