@@ -1,3 +1,4 @@
+from database import SessionLocal, Usuario
 import warnings
 import os
 from dotenv import load_dotenv
@@ -58,6 +59,7 @@ mensagens = [
     }
 ]
 
+
 class Pergunta(BaseModel):
     texto: str
 
@@ -70,6 +72,8 @@ def raiz():
 @app.post("/chat")
 def chat(pergunta: Pergunta):
     global perfil, mensagens
+
+    db = SessionLocal()
 
     texto_original = pergunta.texto.strip()
     texto_usuario = texto_original.lower()
